@@ -1,7 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Microsoft.VisualBasic;
-
+﻿
 var input  = System.IO.File.ReadAllLines("Input.txt");
 
 var partOne = PartOne(input);

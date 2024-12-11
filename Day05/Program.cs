@@ -1,10 +1,43 @@
-﻿var input = File.ReadAllLines("input.txt");
+﻿using System.Runtime.CompilerServices;
+
+var input = File.ReadAllLines("input.txt");
 
 var orderingRules = GetOrderingRules(input);
 var pagesList = GetPagesList(input);
 
 var partOne = PartOne(orderingRules, pagesList);
 Console.WriteLine($"Part one: {partOne}");
+
+var partTwo = PartTwo(orderingRules, pagesList);
+Console.WriteLine($"Part two: {partTwo}");
+
+int PartTwo(List<(int, int)> orderingRules, List<List<int>> pagesList)
+{
+    var result = 0;
+    foreach (var pages in pagesList)
+    {
+        var matchingOrderingRules = GetMatchingOrderingRules(orderingRules, pages);
+        if (!PagesAreInOrder(pages, matchingOrderingRules))
+        {
+            var sortedList = SortPages(pages, matchingOrderingRules);
+            result += sortedList[sortedList.Count / 2];
+        }
+    }
+    return result;
+}
+
+List<int> SortPages(List<int> pages, List<(int, int)> orderingRules)
+{
+    var sortedList = new int[pages.Count];
+
+    foreach (var page in pages)
+    {
+        var i = pages.Count() - orderingRules.Count(x => x.Item1 == page) - 1;
+        sortedList[i] = page;
+    }
+    return sortedList.ToList();
+}
+
 int PartOne(List<(int, int)> orderingRules, List<List<int>> pagesList)
 {
     var result = 0;

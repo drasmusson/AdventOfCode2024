@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
 
 var input = File.ReadAllText("input.txt");
 var sw = Stopwatch.StartNew();
